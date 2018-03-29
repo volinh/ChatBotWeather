@@ -1,8 +1,12 @@
 import os
 import re
+
+from scipy.stats import johnsonsb_gen
+
 import setting
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.externals import joblib
 
 
 def create_train_file_yesno_weather(filePath):
@@ -54,6 +58,8 @@ def train():
     # a = vectorizer.transform(["thời tiết mai mưa không"])
     # b = clf.predict(a)
     # print(b)
+    joblib.dump(vectorizer,setting.INTEND_VECTORIZER_MODEL)
+    joblib.dump(clf,setting.INTEND_CLASSIFY_MODEL)
     return vectorizer,clf
 
 

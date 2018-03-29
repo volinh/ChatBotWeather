@@ -1,7 +1,7 @@
 from nltk.tag.stanford import StanfordNERTagger
 from nltk import word_tokenize
 
-class Detector(object):
+class AdapterNer(object):
 
     def __init__(self):
         classifier = 'data/chatbot-ner.ser.gz'
