@@ -1,7 +1,6 @@
 import os
 import re
-# import setting
-from config import setting
+import setting
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -58,7 +57,6 @@ def train():
     return vectorizer,clf
 
 
-
 def load_data_train():
     list_file_path = [setting.GREETING_FILE,setting.WH_WEATHER_FILE,setting.YESNO_WEATHER_FILE,setting.ORTHER_FILE]
     data = []
@@ -111,10 +109,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # train()
-    # train_data, train_labels = load_data_train()
-    # print(len(train_data))
-    # print(len(train_labels))
-    # filePath1 = setting.YESNOWHEATHER
-    # create_train_file_yesno_weather(filePath1)
-    # create_train_file_wh_weather(setting.WH_WEATHER_FILE)
+
