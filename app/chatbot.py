@@ -17,8 +17,8 @@ class Chatbot(object):
 
 
     def response(self,user_msg):
+        intend = self.adapterIntend.get_intend(user_msg)
         if self.bot_state == 1:
-            intend = self.adapterIntend.get_intend(user_msg)
             if intend == 1 :
                 data = self.adapterGreeting.make_response(user_msg)
             elif intend == 2 :
@@ -29,6 +29,15 @@ class Chatbot(object):
                 data = None
             return self.make_msg(data,intend)
         elif self.bot_state == 2:
+            if intend == 1 :
+                data = self.adapterGreeting.make_response(user_msg)
+            elif intend == 2 :
+                data = self.adapterNer.detect_entity(user_msg)
+            elif intend == 3 :
+                data = self.adapterNer.detect_entity(user_msg)
+            else:
+                data = None
+            return self.make_msg(data,intend)
             pass
 
 
