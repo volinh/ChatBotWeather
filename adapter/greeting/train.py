@@ -49,9 +49,11 @@ def format(line):
 def main():
     filePath = setting.GREETING_TRAIN_FILE
     data = load_data(read_file(filePath))
+    print(data)
     keys = []
     keys.extend(data.keys())
     vectorizer = train(data.keys())
+    vectorizer = joblib.load(setting.GREETING_MODEL)
     while True :
         msg = input("human : ")
         msg = format(msg)
@@ -73,7 +75,8 @@ def best_response(msg,data,vectorizer):
         if min > a[0][0]:
             value = i
             min = a[0][0]
-    print(a[0][0])
+    print(value)
+    print(min)
     if value == None:
         return "khong hieu"
 
@@ -84,4 +87,7 @@ def best_response(msg,data,vectorizer):
 
 
 if __name__ =="__main__":
-    main()
+    # main()
+    a =read_file(setting.GREETING_TRAIN_FILE)
+    for i in a :
+        print(i)

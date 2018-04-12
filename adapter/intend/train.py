@@ -1,10 +1,8 @@
 import os
 import re
 
-from scipy.stats import johnsonsb_gen
-
 import setting
-from sklearn.svm import SVC
+from sklearn.svm import SVC,LinearSVC
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.externals import joblib
 
@@ -53,7 +51,8 @@ def train():
     vectorizer = TfidfVectorizer()
     vectorizer.fit(train_data)
     train_data = vectorizer.transform(train_data)
-    clf = SVC(kernel='linear', degree=3, gamma=1, C=200)
+    # clf = SVC(kernel='poly', degree=4, gamma=1, C=100)
+    clf = LinearSVC()
     clf.fit(train_data, train_labels)
     # a = vectorizer.transform(["thời tiết mai mưa không"])
     # b = clf.predict(a)

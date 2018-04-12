@@ -20,7 +20,7 @@ class AdapterIntend(object):
         msg = self.format(msg)
         vector = self.vectorizer.transform([msg])
         result = self.clf.predict(vector)
-        return result
+        return result[0]
 
 
     def format(self,line):
