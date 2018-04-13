@@ -39,8 +39,8 @@ class AdapterNer(object):
                 result['LOC'].append(tup[0])
             if tup[1] == "TIME":
                 result['TIME'].append(tup[0])
-        result['LOC'] = self.convert_loc(result['LOC'])
-        result['TIME'] = self.convert_time(result['TIME'])
+        # result['LOC'] = self.convert_loc(result['LOC'])
+        # result['TIME'] = self.convert_time(result['TIME'])
         return result
 
 
@@ -69,17 +69,19 @@ class AdapterNer(object):
     def convert_time(data):
         data_time = {}
         current_time = datetime.datetime.now()
-        print(current_time.hour)
+        print(current_time)
         current_day = current_time.day
         current_month = current_time.month
         current_year = current_time.year
         current_hour = current_time.hour
+        current_weekday = current_time.weekday()
 
         data_time["hour"] = 8
         data_time["minute"] = 30
         data_time["day"] = 13
         data_time["month"] = 4
         data_time["year"] = 2018
+        # data_time[]
         return data_time
 
 

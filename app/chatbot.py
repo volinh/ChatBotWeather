@@ -58,7 +58,6 @@ class Chatbot(object):
                 return self.make_msg(data, intend)
 
 
-
     def make_msg(self,data=None,intend=4):
         data_msg = {}
         if self.bot_state == 3 :
