@@ -13,7 +13,7 @@ class Chatbot(object):
         self.adapterNer = AdapterNer()
         self.time = None
         self.loc = None
-        self.weather = "thời tiết"
+        self.weather = ["thời tiết"]
 
 
     def response(self,user_msg):
@@ -67,20 +67,27 @@ class Chatbot(object):
             if data['TIME'] != [] :
                 self.time = data['TIME']
             self.bot_msg = "chua co api"
-            self.weather = "thời tiết"
+            if len(data["WEATHER"]) == 0:
+                self.weather = self.weather
+            else:
+                self.weather = data["WEATHER"]
             self.bot_state = 3
         else :
             if intend == 1:
                 self.loc = None
                 self.time = None
                 self.bot_msg = data
-                self.weather = "thời tiết"
+                self.weather = ["thời tiết"]
                 self.bot_state = 1
             elif intend == 2:
                 self.loc = data["LOC"]
                 self.time = data["TIME"]
                 self.bot_msg = "chua co api"
-                self.weather = self.weather
+                if len(data["WEATHER"]) == 0:
+                    self.weather = ["thời tiết"]
+                else:
+                    self.weather = data["WEATHER"]
+
                 if self.loc == None or self.loc == []:
                     self.bot_msg = "bạn cho xin địa điểm :D"
                     self.bot_state = 2
@@ -93,7 +100,11 @@ class Chatbot(object):
                 self.loc = data["LOC"]
                 self.time = data["TIME"]
                 self.bot_msg = "chua co api"
-                self.weather = self.weather
+                if len(data["WEATHER"]) == 0:
+                    self.weather = ["thời tiết"]
+                else:
+                    self.weather = data["WEATHER"]
+
                 if self.loc == None or self.loc == []:
                     self.bot_msg = "bạn cho xin địa điểm :D"
                     self.bot_state = 2
@@ -106,7 +117,7 @@ class Chatbot(object):
                 self.loc = None
                 self.time = None
                 self.bot_msg = "mình không hiểu ý bạn :("
-                self.weather = "thời tiết"
+                self.weather = ["thời tiết"]
                 self.bot_state = 1
             elif intend == 4 and self.bot_state == 2:
                 if data["LOC"] != []:
@@ -114,7 +125,11 @@ class Chatbot(object):
                 if data["TIME"] != []:
                     self.time = data["TIME"]
                 self.bot_msg = "chua co api"
-                self.weather = self.weather
+                if len(data["WEATHER"]) == 0:
+                    self.weather = self.weather
+                else:
+                    self.weather = data["WEATHER"]
+
                 if self.loc == None or self.loc == []:
                     self.bot_msg = "bạn cho xin địa điểm :D"
                     self.bot_state = 2
@@ -141,8 +156,3 @@ class Chatbot(object):
                 bot_msg = self.response(msg)
                 print("bot : {}".format(bot_msg))
                 print("\n")
-
-
-
-
-

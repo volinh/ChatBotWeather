@@ -47,6 +47,7 @@ def main():
 if __name__ == "__main__" :
     # creat_train_ner(setting.TRAIN_NER_FILE,setting.RAW_TRAIN_NER_FILE)
     # preprocess_train_ner(setting.TRAIN_NER_FILE)
+    # train()
     # main()
     # creat_raw_train_ner(setting.RAW_TRAIN_NER_FILE)
     pass

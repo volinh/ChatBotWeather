@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # params['key'] = KEY
     # params['dt'] = "2018 - 04 - 09"
     # params['lang'] = "vi"
-    args = {'q':'hanoi','hour':'0','dt':'2018 - 04 - 10',}
+    args = {'q':'hanoi','hour':'0','dt':'2018 - 04 - 13',}
     json_data = get_forecast_weather(args)
     pp.pprint(json_data)
 

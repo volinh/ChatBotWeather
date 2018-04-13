@@ -48,7 +48,7 @@ def create_train_file_wh_weather(filePath):
 
 def train():
     train_data,train_labels = load_data_train()
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(ngram_range=(1,6))
     vectorizer.fit(train_data)
     train_data = vectorizer.transform(train_data)
     # clf = SVC(kernel='poly', degree=4, gamma=1, C=100)

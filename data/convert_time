@@ -1,0 +1,65 @@
+ngày mai | day | 1
+mai | day | 1
+mai sau | day | 1
+hôm nay | day | 0
+ngày kia | day | 2
+ngày kia nữa | day | 3
+ngày mốt | day | 2
+tuần này | week | 0
+tuần sau | week | 1
+tuần trước | week | -1
+tháng này | month | 0
+tháng trước | month | -1
+tháng sau | month | 1
+hôm qua | day | -1
+hôm trước | day | -2
+bình minh | time | 0 | dawn
+hoàng hôn | time | 0 | sunset
+mặt trời mọc | time | 0 | dawn
+mặt trời lặn | time | 0 | sunset
+chiều tà | time | 16,17,18
+nửa đêm | time | 23,0,1
+giữa trưa | time | 12
+về sáng | time | 3,4,5,6
+đêm xuống | time | 18,19,20,21,22,23,0
+đêm | time | 18,19,20,21,22,23,0,1,2,3,4,5
+ngày | time | 6,7,8,9,10,11,12,13,14,15,16,17
+sáng | time | 6,7,8,9,10,11
+chiều | time | 13,14,15,16,17
+tối | time | 18,19,20,21,22,23
+trưa | time | 12
+buổi sáng | time | 6,7,8,9,10,11
+buổi chiều | time | 13,14,15,16,17
+buổi trưa | time | 12
+buổi tối | time | 18,19,20,21,22,23
+buổi đêm | time | 18,19,20,21,22,23,0,1,2,3,4,5
+ban ngày | time | 6,7,8,9,10,11,12,13,14,15,16,17
+ban đêm | time | 18,19,20,21,22,23,0,1,2,3,4,5
+giữa trưa | time | 12
+bây giờ | time | now
+hiện tại | time | now
+lúc này | time | now
+ngay lúc này | time | now
+ngày 20 | ex | ngày ([0-9]{1,2})
+ngày 20/10 | ex | ngày ([0-9]{1,2}/[0-9]{1,2})
+ngày 26/2/2017 | ex | ngày ([0-9]{1,2}/[0-9]{1,2}/[0-9]{4})
+ngày 20-1 | ex | ngày ([0-9]{1,2}-[0-9]{1,2})
+ngày 19-10-2017 | ex | ngày ([0-9]{1,2}-[0-9]{1,2}-[0-9]{4})
+ngày 20 tháng này | ex | ngày ([0-9]{1,2}) tháng (này|sau|kia|trước)
+ngày 20 tháng 3
+ngày 20 tháng 3 năm 2018
+thứ 2
+thứ 3
+tháng 7
+năm 2020
+chủ nhật
+đầu tuần
+cuối tuần
+5 giờ
+6 h
+2h
+2h50
+5 h 45 phút
+5:30
+5:30:60
+5 giờ 30 phút
