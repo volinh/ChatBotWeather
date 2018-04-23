@@ -2,7 +2,9 @@ from builtins import dict
 from nltk.tag.stanford import StanfordNERTagger
 from nltk import word_tokenize
 import datetime
-
+from adapter.ner.time_detection import TimeDetector
+from adapter.ner.date_detection import DateDetector
+from adapter.ner.location_detection import LocationDetector
 import setting
 import re
 
@@ -34,13 +36,24 @@ class AdapterNer(object):
         result['LOC'] = []
         result['TIME'] = []
         result['WEATHER'] = self.detect_weather(user_msg)
-        for tup in list_entity :
+        sub_loc = ""
+        for tup in list_entity:
             if tup[1] == "LOC" :
-                result['LOC'].append(tup[0])
-            if tup[1] == "TIME":
-                result['TIME'].append(tup[0])
-        # result['LOC'] = self.convert_loc(result['LOC'])
-        # result['TIME'] = self.convert_time(result['TIME'])
+                sub_loc = sub_loc + " " + tup[0]
+            else :
+                if sub_loc != "":
+                    result['LOC'].append(sub_loc.strip())
+                sub_loc = ""
+        sub_time = ""
+        for tup in list_entity :
+            if tup[1] == "TIME" :
+                sub_time = sub_time + " " + tup[0]
+            else :
+                if sub_time != "" :
+                    result['TIME'].append(sub_time.strip())
+                sub_time = ""
+        result['LOC'] = self.convert_loc(result['LOC'])
+        result['TIME'] = self.convert_time(result['TIME'])
         return result
 
 
@@ -59,7 +72,7 @@ class AdapterNer(object):
     @staticmethod
     def detect_question_again(user_msg):
         user_msg = re.sub("\?","",user_msg).strip()
-        matchObj = re.match(r'(vậy|vậy còn) (.*) .*', user_msg, re.M | re.I)
+        matchObj = re.match(r'(vậy|vậy còn|thế còn|còn|thế) (.*) .*', user_msg, re.M | re.I)
         if matchObj :
             return True
         return False
@@ -67,29 +80,29 @@ class AdapterNer(object):
 
     @staticmethod
     def convert_time(data):
-        data_time = {}
-        current_time = datetime.datetime.now()
-        print(current_time)
-        current_day = current_time.day
-        current_month = current_time.month
-        current_year = current_time.year
-        current_hour = current_time.hour
-        current_weekday = current_time.weekday()
-
-        data_time["hour"] = 8
-        data_time["minute"] = 30
-        data_time["day"] = 13
-        data_time["month"] = 4
-        data_time["year"] = 2018
-        # data_time[]
+        timeDetector = TimeDetector()
+        dateDetector = DateDetector()
+        data_time = []
+        for time in data :
+            sub_time = timeDetector.detect_time(time)
+            sub_date = dateDetector.detect_date(time)
+            for i in sub_time :
+                for j in sub_date:
+                    sub_data = {}
+                    sub_data.update(i)
+                    sub_data.update(j)
+                    data_time.append(sub_data)
         return data_time
 
 
     @staticmethod
     def convert_loc(data):
-        data_loc = {}
-        data_loc["city"] = "Ha noi"
-        data_loc["country"] = "VN"
+        locationDetector = LocationDetector()
+        data_loc = []
+        for loc in data :
+            sub_data = {}
+            locationDetector.detect_time(loc,sub_data)
+            data_loc.append(sub_data)
         return data_loc
 
 

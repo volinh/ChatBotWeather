@@ -21,11 +21,29 @@ import re
 # patterns1 ="(?:nd|st|rd|th)?"
 # s = re.match(patterns1,"st")
 # print(s.group(0))
-msg = "lúc 17 : 17 : 12"
-patterns2 = re.findall(r'\D(?:(00|[0]?[2-9]|[0]?1[0-9]?|2[0-3]):([0-5]?[0-9]))', msg)
-patterns3 = re.findall(r'\D(0?[0-9]|1[0-9]|2[0-3])(?:\s*):(?:\s*)([0-5]?[0-9])', msg)
+# msg = " 17:17:12 va 20:56"
+# patterns2 = re.findall(r'\D(?:(00|[0]?[2-9]|[0]?1[0-9]?|2[0-3]):([0-5]?[0-9]))', msg)
+# patterns3 = re.findall('\D(0?[0-9]|1[0-9]|2[0-3])(?:\s*):(?:\s*)([0-5]?[0-9])', msg)
+#
+# # for pattern in patterns2:
+# #     print(pattern)\D
+# print(patterns2)
+# print(patterns3)
 
-# for pattern in patterns2:
-#     print(pattern)\D
-print(patterns2)
-print(patterns3)
+# big_pattern1 = r'([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)/(?:\s*)(1[0-2]|0?[1-9])|' + \
+        #                r'(?:[^0-9\w]|^)ngày(?:\s*)([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)tháng(?:\s*)(1[0-2]|0?[1-9])(?:\s*)năm(?:\s*)(2[0-9]{3})|' + \
+        #                r'(?:[^0-9\w]|^)ngày(?:\s*)([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)tháng(?:\s*)(1[0-2]|0?[1-9])|' + \
+        #                r'(?:[^0-9\w]|^)ngày(?:\s*)([1-2][0-9]|3[0-1]|0?[1-9])|' + \
+        #                r'(?:[^0-9\w]|^)tháng(?:\s*)(1[0-2]|0?[1-9])(?:\s*)năm(?:\s*)(2[0-9]{3})|' + \
+        #                r'(?:[^0-9\w]|^)tháng(?:\s*)(1[0-2]|0?[1-9])|' + \
+        #                r'(?:[^0-9\w]|^)năm(?:\s*)(2[0-9]{3})'
+msg ="11 giờ hoăc 23 gi"
+patterns4 = re.findall(r'(?:(?:[^0-9\w]|^)([0:1]?[0-9]|2[0-3])(?:\s*)giờ)',msg)
+print(patterns4)
+
+a = {"1":1,"2":3}
+b = {"1":3,"4":4}
+c = {}
+c.update(a)
+c.update(b)
+print(c)
