@@ -44,6 +44,8 @@ class AdapterNer(object):
                 if sub_loc != "":
                     result['LOC'].append(sub_loc.strip())
                 sub_loc = ""
+        if sub_loc != "" :
+            result['LOC'].append(sub_loc.strip())
         sub_time = ""
         for tup in list_entity :
             if tup[1] == "TIME" :
@@ -52,6 +54,9 @@ class AdapterNer(object):
                 if sub_time != "" :
                     result['TIME'].append(sub_time.strip())
                 sub_time = ""
+        if sub_time != "":
+            result['TIME'].append(sub_time.strip())
+        print(result)
         result['LOC'] = self.convert_loc(result['LOC'])
         result['TIME'] = self.convert_time(result['TIME'])
         return result
@@ -85,7 +90,9 @@ class AdapterNer(object):
         data_time = []
         for time in data :
             sub_time = timeDetector.detect_time(time)
+            print(sub_time)
             sub_date = dateDetector.detect_date(time)
+            print(sub_date)
             for i in sub_time :
                 for j in sub_date:
                     sub_data = {}
@@ -100,9 +107,10 @@ class AdapterNer(object):
         locationDetector = LocationDetector()
         data_loc = []
         for loc in data :
-            sub_data = {}
-            locationDetector.detect_time(loc,sub_data)
-            data_loc.append(sub_data)
+            sub_loc = locationDetector.detect_location(loc)
+            if sub_loc == None:
+                continue
+            data_loc.append(sub_loc)
         return data_loc
 
 

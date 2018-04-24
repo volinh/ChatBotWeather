@@ -46,4 +46,22 @@ b = {"1":3,"4":4}
 c = {}
 c.update(a)
 c.update(b)
+print("3" in a.keys())
+
+a = [{"1":1,"2":2},{"1":2,"2":4}]
+b = [{"1":1,"2":2},{"1":3,"2":5}]
+print({"1":2,"2":4} in a)
+print(a)
+a.remove({"1":1,"2":2})
+print(a)
+
+c = a.copy()
 print(c)
+c.append("4")
+print(a)
+print(c)
+
+for i in range(100):
+    if i != 10:
+        print(i)
+    else:break

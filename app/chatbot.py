@@ -1,6 +1,11 @@
+from scipy.interpolate.interpolate import _ppform
+
 from adapter.intend.adapterIntend import AdapterIntend
 from adapter.greeting.adapterGreeting import AdapterGreeting
 from adapter.ner.adapterNer import AdapterNer
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 class Chatbot(object):
 
@@ -153,5 +158,6 @@ class Chatbot(object):
                 print("bot : bạn nhập tin nhắn đi !")
             else:
                 bot_msg = self.response(msg)
-                print("bot : {}".format(bot_msg))
+                print("bot : ")
+                pp.pprint(bot_msg)
                 print("\n")
