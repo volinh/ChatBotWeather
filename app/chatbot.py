@@ -66,16 +66,23 @@ class Chatbot(object):
     def make_msg(self,data=None,intend=4):
         data_msg = {}
         if self.bot_state == 3 :
-            if data['LOC'] != [] :
-                self.loc = data['LOC']
-            if data['TIME'] != [] :
-                self.time = data['TIME']
-            self.bot_msg = "chua co api"
-            if len(data["WEATHER"]) == 0:
-                self.weather = self.weather
-            else:
-                self.weather = data["WEATHER"]
-            self.bot_state = 3
+            if data['LOC'] == [] and data['TIME'] == [] and data['WEATHER'] == [] :
+                self.loc = []
+                self.time = []
+                self.weather = ["thời tiết"]
+                self.bot_msg = "mình không hiểu ý bạn :("
+                self.bot_state = 1
+            else :
+                if data['LOC'] != [] :
+                    self.loc = data['LOC']
+                if data['TIME'] != [] :
+                    self.time = data['TIME']
+                self.bot_msg = "chua co api"
+                if len(data["WEATHER"]) == 0:
+                    self.weather = self.weather
+                else:
+                    self.weather = data["WEATHER"]
+                self.bot_state = 3
         else :
             if intend == 1:
                 self.loc = None
