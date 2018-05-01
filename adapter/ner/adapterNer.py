@@ -11,7 +11,7 @@ import re
 class AdapterNer(object):
 
     def __init__(self):
-        classifier = 'data/chatbot-ner.ser.gz'
+        classifier = 'model/chatbot-ner.ser.gz'
         jar = 'stanford-ner/stanford-ner.jar'
         self.st = StanfordNERTagger(classifier, jar)
         self.dict_weather = self.read_file(setting.DIC_WEATHER_FILE)
