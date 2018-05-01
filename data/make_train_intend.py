@@ -46,6 +46,7 @@ def make_train_yesno_weather():
     raw_data = read_file(filePath)
     data = []
     data.extend(raw_data)
+
     print(len(data))
     for line in raw_data:
         line1 = "cho hỏi " + line

@@ -87,7 +87,7 @@ def best_response(msg,data,vectorizer):
 
 
 if __name__ =="__main__":
-    # main()
-    a =read_file(setting.GREETING_TRAIN_FILE)
-    for i in a :
-        print(i)
+    main()
+    # a =read_file(setting.GREETING_TRAIN_FILE)
+    # for i in a :
+    #     print(i)

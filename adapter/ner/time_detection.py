@@ -21,6 +21,7 @@ class TimeDetector():
         pattern5 = r'(?:[^0-9\w]|^)([0-1]?[0-9]|2[0-3])(?:\s*):(?:\s*)([0-5]?[0-9])'
         big_pattern1 = r'(?:[^0-9\w]|^)([0-1]?[0-9]|2[0-3])(?:\s*)giờ(?:\s*)([0-5]?[0-9])(?:\s*)|(?:[^0-9\w]|^)([0-1]?[0-9]|2[0-3])(?:\s*)giờ'
         big_pattern2 = r'(?:[^0-9\w]|^)([0-1]?[0-9]|2[0-3])(?:\s*)h(?:\s*)([0-5]?[0-9])(?:\s*)|(?:[^0-9\w]|^)([0-1]?[0-9]|2[0-3])(?:\s*)h'
+        pattern_spec1 = r'(bây giờ|hiện tại|lúc này|ngay lúc này)'
         patterns = re.findall(pattern5, time)
         for pattern in patterns:
             sub_time = {
@@ -71,4 +72,6 @@ class TimeDetector():
 if __name__ == "__main__" :
     timeDetector = TimeDetector()
     msg = "tôi sẽ đi làm vào 12 giờ , 9giờ , 11:3:4 và 19 giờ 56 ,còn ngày mai lúc 20h06  hoặc lúc 23 h 09 có ca nhạc đêm khuya"
-    timeDetector.detect_time(msg)
+    data = timeDetector.detect_time(msg)
+    for i in data :
+        print(i)

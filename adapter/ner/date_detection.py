@@ -1,10 +1,6 @@
 import datetime
 import re
 
-from builtins import len
-from lib2to3.pygram import pattern_symbols
-
-
 class DateDetector():
 
     def __init__(self):
@@ -43,6 +39,7 @@ class DateDetector():
         pattern_spec15 = r'(thứ 6|thứ sáu)'
         pattern_spec16 = r'(thứ 7|thứ bảy)'
         pattern_spec17 = r'(chủ nhật)'
+        pattern_spec18 = r'(vài ngày tới)'
         pattern_spec19 = r'(tháng sau)'
         pattern_spec20 = r'(tháng trước)'
         pattern_spec21 = r'(tháng này|tháng hiện tại)'

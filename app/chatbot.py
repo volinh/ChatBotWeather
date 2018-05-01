@@ -3,6 +3,7 @@ from scipy.interpolate.interpolate import _ppform
 from adapter.intend.adapterIntend import AdapterIntend
 from adapter.greeting.adapterGreeting import AdapterGreeting
 from adapter.ner.adapterNer import AdapterNer
+from app import apixuChatBot as api
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -156,6 +157,10 @@ class Chatbot(object):
         data_msg["msg"] = self.bot_msg
         data_msg["state"] = self.bot_state
         return data_msg
+
+    def query_api(self,data):
+        # api.get_forecast_weather()
+        pass
 
 
     def main(self):
