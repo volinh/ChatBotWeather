@@ -48,3 +48,22 @@
                 - cái openweathermap cần nhiều tiền mới hỗ trợ
                 - cái AccWeather ko hỗ trợ dữ liệu lịch sử quá 24h , nhưng forecast hình như chi tiết hơn
                 - cái api.apixu.com mỗi cái đều trung bình
+
+6. train
+    - intend :
+        - thêm dữ liệu vào 4 file trong data :
+            - greeting
+            - orther
+            - wh_weather
+            - yesno_weather
+    - ner :
+        - thêm dữ liệu đánh tag vào file train_ner
+    - greeting :
+        - thêm dữ liệu vào file greeting_train_file
+
+    train cái nào thì vào file main.py , gọi hàm train() của train.py phần đó ra
+
+    ex :
+        from adapter.ner import train
+        train.train()
+
