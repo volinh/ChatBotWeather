@@ -22,7 +22,7 @@ class DateDetector():
         pattern7 = r'(?:[^0-9\w]|^)([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)(?:[/-]|tháng)(?:\s*)(1[0-2]|0?[1-9])'
         pattern8 = r'(?:[^0-9\w]|^)([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)(?:[/-]|tháng)(?:\s*)(1[0-2]|0?[1-9])(?:\s*)(?:[/-]|năm)(?:\s*)(2[0-9]{3})'
         pattern9 = r'(?:[^0-9\w]|^)(1[0-2]|0?[1-9])(?:\s*)(?:[/-]|năm)(?:\s*)(2[0-9]{3})'
-        pattern_spec1 = r'(hôm nay|bây giờ|bây h|hiện tại|hiện nay|lúc này)'
+        pattern_spec1 = r'(hôm nay|bây giờ|bây h|hiện tại|hiện nay|lúc này|nay)'
         pattern_spec2 = r'(ngày mai|mai|hôm sau)'
         pattern_spec3 = r'(ngày kia|ngày mốt|hôm kia)'
         pattern_spec4 = r'(ngày kia nữa|hôm kia nữa)'
@@ -499,7 +499,7 @@ if __name__ == "__main__" :
     # msg = "tháng 1 năm 2017 và năm 2016"
     # msg = "ngày mai và hôm qua ,hiện tại, đến ngày 24 tháng 6/2011 có gì ,ngày 8 tháng 9"
     # msg = " ngày 19 tháng này thứ 7 tuần này"
-    msg = " ngày 23 , tháng sau vài ngày trước có mưa không"
+    msg = " ngày 23 tháng sau vài ngày trước có mưa không"
     data = dateDetector.detect_date(msg)
     print("=========================")
     for i in data:
