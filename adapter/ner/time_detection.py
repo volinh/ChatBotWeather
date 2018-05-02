@@ -1,9 +1,6 @@
 import datetime
 import re
 
-from docutils.nodes import paragraph
-
-
 class TimeDetector():
 
     def __init__(self):
