@@ -114,7 +114,6 @@ class TimeDetector():
                 data_time.append(sub_time)
 
         patterns = re.findall(pattern_spec14, time)
-        print(patterns)
         if len(patterns) == 0:
             patterns = re.findall(pattern_spec9, time)
             for pattern in patterns:
