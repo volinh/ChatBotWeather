@@ -29,7 +29,7 @@ class DateDetector():
         pattern_spec5 = r'(hôm qua)'
         pattern_spec6 = r'(hôm trước)'
         pattern_spec7 = r'(tuần này|tuần hiện tại|tuần hiện giờ)'
-        pattern_spec8 = r'(tuần sau)'
+        pattern_spec8 = r'(tuần sau|tuần tới)'
         pattern_spec9 = r'(tuần kia|tuần sau nữa)'
         pattern_spec10 = r'(tuần trước|tuần vừa rồi)'
         pattern_spec11 = r'(thứ 2|thứ hai)'

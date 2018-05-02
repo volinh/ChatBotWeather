@@ -188,9 +188,10 @@ class TimeDetector():
                         data_time.append(sub_time)
         else :
             bol = True
+            print(patterns)
             for pattern in patterns:
                 if pattern[4] != "":
-                    if int(pattern[4]) <= 12 and int(pattern[4]>=6):
+                    if int(pattern[4]) <= 12 and int(pattern[4])>=6:
                         hour = (12 + int(pattern[4]))%24
                     else :
                         hour = pattern[4]
