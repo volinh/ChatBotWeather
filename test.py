@@ -68,14 +68,17 @@ import datetime
 #         break
 
 
-cur = datetime.datetime.now()
-day_week = cur.weekday()
-fu = cur + datetime.timedelta(6)
-a = cur - datetime.timedelta(day_week)
-print(cur + datetime.timedelta(-3))
-for i in range(7):
-    print(a + datetime.timedelta(i))
+# cur = datetime.datetime.now()
+# day_week = cur.weekday()
+# fu = cur + datetime.timedelta(6)
+# a = cur - datetime.timedelta(day_week)
+# print(cur + datetime.timedelta(-3))
+# for i in range(7):
+#     print(a + datetime.timedelta(i))
 
 # print(fu)
+
+for i in range(10,20):
+    print(i)
 
 

@@ -39,7 +39,7 @@ class DateDetector():
         pattern_spec15 = r'(thứ 6|thứ sáu)'
         pattern_spec16 = r'(thứ 7|thứ bảy)'
         pattern_spec17 = r'(chủ nhật)'
-        pattern_spec18 = r'(vài ngày tới)'
+
         pattern_spec19 = r'(tháng sau)'
         pattern_spec20 = r'(tháng trước)'
         pattern_spec21 = r'(tháng này|tháng hiện tại)'
@@ -50,6 +50,8 @@ class DateDetector():
         pattern_spec26 = r'(?:[^0-9\w]|^)([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)(?:tháng trước)'
         pattern_spec27 = r'(?:[^0-9\w]|^)([1-2][0-9]|3[0-1]|0?[1-9])(?:\s*)(?:tháng này|tháng hiện tại)'
 
+        pattern_spec28 = r'(vài ngày tới|vài ngày nữa|vài hôm nữa|vài hôm tới)'
+        pattern_spec29 = r'(vài ngày trước|vài ngày vừa rồi|vài ngày vừa qua|vài ngày qua|vài hôm trước|vài hôm vừa rồi)'
 
 
         patterns = re.findall(pattern1, date)
@@ -277,9 +279,8 @@ class DateDetector():
                     }
                     data_date2.append(sub_date)
 
-
-
         # =======================================================
+
         patterns = re.findall(pattern_spec19, date)
         for pattern in patterns:
             if current_month == 12 :
@@ -382,6 +383,25 @@ class DateDetector():
             }
             data_date.append(sub_date)
         # =======================================================
+        patterns = re.findall(pattern_spec28, date)
+        for pattern in patterns:
+            for i in range(3):
+                fu_day = current_time + datetime.timedelta(i + 1)
+                data_date.append({
+                    "day": str(fu_day.day),
+                    "month": str(fu_day.month),
+                    "year": str(fu_day.year)
+                })
+        patterns = re.findall(pattern_spec29, date)
+        for pattern in patterns:
+            for i in range(3):
+                fu_day = current_time + datetime.timedelta(0-i-1)
+                data_date.append({
+                    "day": str(fu_day.day),
+                    "month": str(fu_day.month),
+                    "year": str(fu_day.year)
+                })
+
         data_date = self.filter_date(data_date)
         data_date = data_date + data_date2
         if len(data_date) == 0 :
@@ -470,23 +490,6 @@ class DateDetector():
             data.extend(data_tmp_cp1)
             data.extend(data_tmp_cp2)
             data.extend(data_tmp_cp3)
-
-        # data_tmp1 = []
-        # data_tmp2 = []
-        # data_tmp = data.copy()
-        # for i in data :
-        #     if i['day'] != None and i['month'] == None and i['year'] == None :
-        #         data_tmp1.append(i)
-        #     elif i['day'] == None and i['month'] != None :
-        #         data_tmp2.append(i)
-        #     if i['month'] != None
-        # for i in data_tmp1 :
-        #     if len(data_tmp2) == 0 :
-        #         data.remove(i)
-        #         data.append({
-        #             'day':i['day']
-        #             'month'
-        #         })
             
         return data
 
@@ -496,7 +499,7 @@ if __name__ == "__main__" :
     # msg = "tháng 1 năm 2017 và năm 2016"
     # msg = "ngày mai và hôm qua ,hiện tại, đến ngày 24 tháng 6/2011 có gì ,ngày 8 tháng 9"
     # msg = " ngày 19 tháng này thứ 7 tuần này"
-    msg = " ngày 23 , tháng sau "
+    msg = " ngày 23 , tháng sau vài ngày trước có mưa không"
     data = dateDetector.detect_date(msg)
     print("=========================")
     for i in data:

@@ -30,7 +30,7 @@ def pass_entity(list_entity):
 
 
 def main():
-    classifier = 'data/chatbot-ner.ser.gz'
+    classifier = 'model/chatbot-ner.ser.gz'
     jar = 'stanford-ner/stanford-ner.jar'
     st = StanfordNERTagger(classifier, jar)
     while True :
