@@ -36,7 +36,10 @@ def get_forecast_weather(args=None):
     if args != None:
         params.update(args)
     response = requests.get(url, params).json()
-    return response
+    return response['forecast']
+
+def convert_forecast(data) :
+    pass
 
 if __name__ == "__main__":
     pp = pprint.PrettyPrinter(indent=2)
@@ -45,9 +48,13 @@ if __name__ == "__main__":
     # params['key'] = KEY
     # params['dt'] = "2018 - 04 - 09"
     # params['lang'] = "vi"
-    args = {'q':'hanoi','hour':'0','dt':'2018 - 04 - 13',}
+    args = {'q':'hanoi','hour':'0','dt':'2018 - 05 - 10'}
     json_data = get_forecast_weather(args)
     pp.pprint(json_data)
+
+    pp.pprint(get_data_curent_weather({'q':'hanoi'}))
+    pp.pprint(get_history_weather({'q':'hanoi','hour':'0','dt':'2018 - 04 - 30'}))
+
 
     # time2 = datetime.datetime.time
     # print(time2)
