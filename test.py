@@ -78,7 +78,17 @@ import datetime
 
 # print(fu)
 
-for i in range(10,20):
-    print(i)
+# a = {}
+# a["a"] = 1
+# print("a1" in a)
+#
+# for i in range(10,20):
+#     print(i)
+
+import datetime
+
+a= datetime.datetime.now()
+print(a)
+print(type(a))
 
 

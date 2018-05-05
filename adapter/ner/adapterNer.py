@@ -1,4 +1,6 @@
 from builtins import dict
+
+from datetime import date
 from nltk.tag.stanford import StanfordNERTagger
 from nltk import word_tokenize
 import datetime
@@ -26,7 +28,7 @@ class AdapterNer(object):
     def detect_weather(self,user_msg):
         result = []
         for i in self.dict_weather:
-            if i in user_msg :
+            if i in user_msg.lower().strip() :
                 result.append(i)
         return result
 
@@ -99,6 +101,88 @@ class AdapterNer(object):
                     sub_data.update(i)
                     sub_data.update(j)
                     data_time.append(sub_data)
+        return AdapterNer.fill_time(data_time)
+
+
+    @staticmethod
+    def fill_time(data):
+        months = []
+        years = []
+        data_time = []
+        current_time = datetime.datetime.now()
+        for date in data:
+            if date['month'] != None :
+                months.append(date['month'])
+            if date['year'] != None :
+                years.append(date['year'])
+        for date in data:
+            if date['day'] == None and date['month'] == None and date['year'] == None :
+                if len(data) > 1 :
+                    continue
+                else :
+                    data_time.append({
+                        "day" : current_time.day ,
+                        "month" : current_time.month ,
+                        "year" : current_time.year
+                    })
+            elif date['day'] == None and date['month'] != None and date['year'] == None :
+                if len(years) > 0 :
+                    data_time.append({
+                        "day": "1",
+                        "month": date['month'],
+                        "year": years[0]
+                    })
+                else :
+                    data_time.append({
+                        "day": "1",
+                        "month": date['month'],
+                        "year": current_time.year
+                    })
+            elif date['day'] == None and date['month'] != None and date['year'] != None :
+                data_time.append({
+                    "day": "1",
+                    "month": date['month'],
+                    "year": date['year']
+                })
+            elif date['day'] != None and date['month'] == None and date['year'] == None :
+                if len(months) > 0 :
+                    if len(years) > 0 :
+                        data_time.append({
+                            "day": date['day'],
+                            "month": months[0],
+                            "year": years[0]
+                        })
+                    else :
+                        data_time.append({
+                            "day": date['day'],
+                            "month": months[0],
+                            "year": current_time.year
+                        })
+                else :
+                    data_time.append({
+                        "day": date['day'],
+                        "month": current_time.month,
+                        "year": current_time.year
+                    })
+            elif date['day'] != None and date['month'] != None and date['year'] == None :
+                if len(years) > 0:
+                    data_time.append({
+                        "day": date['day'],
+                        "month": date['month'],
+                        "year": years[0]
+                    })
+                else :
+                    data_time.append({
+                        "day": date['day'],
+                        "month": date['month'],
+                        "year": current_time.year
+                    })
+            elif date['day'] == None and date['month'] == None and date['year'] != None :
+                data_time.append({
+                    "day": "1",
+                    "month": "1",
+                    "year": date['year']
+                })
         return data_time
 
 

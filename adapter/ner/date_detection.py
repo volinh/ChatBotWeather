@@ -53,6 +53,9 @@ class DateDetector():
         pattern_spec28 = r'(vài ngày tới|vài ngày nữa|vài hôm nữa|vài hôm tới)'
         pattern_spec29 = r'(vài ngày trước|vài ngày vừa rồi|vài ngày vừa qua|vài ngày qua|vài hôm trước|vài hôm vừa rồi)'
 
+        pattern_spec30 = r'(?:[^0-9\w]|^)(\d+)(?:\s*)(?:ngày tới|ngày nữa|hôm nữa|hôm tới)'
+        pattern_spec31 = r'(?:[^0-9\w]|^)(\d+)(?:\s*)(?:vài ngày trước|vài ngày vừa rồi|vài ngày vừa qua|vài ngày qua|vài hôm trước|vài hôm vừa rồi)'
+
 
         patterns = re.findall(pattern1, date)
         for pattern in patterns:
@@ -402,6 +405,26 @@ class DateDetector():
                     "year": str(fu_day.year)
                 })
 
+        patterns = re.findall(pattern_spec30, date)
+        for pattern in patterns:
+            for i in range(1,int(pattern)+1):
+                fu_day = current_time + datetime.timedelta(i)
+                data_date.append({
+                    "day": str(fu_day.day),
+                    "month": str(fu_day.month),
+                    "year": str(fu_day.year)
+                })
+
+        patterns = re.findall(pattern_spec31, date)
+        for pattern in patterns:
+            for i in range(1, int(pattern) + 1):
+                fu_day = current_time - datetime.timedelta(i)
+                data_date.append({
+                    "day": str(fu_day.day),
+                    "month": str(fu_day.month),
+                    "year": str(fu_day.year)
+                })
+
         data_date = self.filter_date(data_date)
         data_date = data_date + data_date2
         if len(data_date) == 0 :
@@ -411,6 +434,10 @@ class DateDetector():
                 "year": None
             })
         return data_date
+
+
+    def unique_date(self,data):
+        pass
 
 
     def _detect_range(self):
@@ -490,7 +517,6 @@ class DateDetector():
             data.extend(data_tmp_cp1)
             data.extend(data_tmp_cp2)
             data.extend(data_tmp_cp3)
-            
         return data
 
 if __name__ == "__main__" :
@@ -499,7 +525,7 @@ if __name__ == "__main__" :
     # msg = "tháng 1 năm 2017 và năm 2016"
     # msg = "ngày mai và hôm qua ,hiện tại, đến ngày 24 tháng 6/2011 có gì ,ngày 8 tháng 9"
     # msg = " ngày 19 tháng này thứ 7 tuần này"
-    msg = " ngày 23 tháng sau vài ngày trước có mưa không"
+    msg = " ngày kia nữa"
     data = dateDetector.detect_date(msg)
     print("=========================")
     for i in data:

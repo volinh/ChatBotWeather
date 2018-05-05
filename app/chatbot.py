@@ -5,6 +5,7 @@ from adapter.greeting.adapterGreeting import AdapterGreeting
 from adapter.ner.adapterNer import AdapterNer
 from app import apixuChatBot as api
 import pprint
+import datetime
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -78,7 +79,7 @@ class Chatbot(object):
                     self.loc = data['LOC']
                 if data['TIME'] != [] :
                     self.time = data['TIME']
-                self.bot_msg = "chua co api"
+                self.bot_msg = self.query_api({"loc": self.loc, "time": self.time, "weather": self.weather})
                 if len(data["WEATHER"]) == 0:
                     self.weather = self.weather
                 else:
@@ -94,7 +95,6 @@ class Chatbot(object):
             elif intend == 2:
                 self.loc = data["LOC"]
                 self.time = data["TIME"]
-                self.bot_msg = "chua co api"
                 if len(data["WEATHER"]) == 0:
                     self.weather = ["thời tiết"]
                 else:
@@ -107,11 +107,11 @@ class Chatbot(object):
                     self.bot_msg = "bạn cho xin thời gian :D"
                     self.bot_state = 2
                 else:
+                    self.bot_msg = self.query_api({"loc": self.loc, "time": self.time, "weather": self.weather})
                     self.bot_state = 3
             elif intend == 3:
                 self.loc = data["LOC"]
                 self.time = data["TIME"]
-                self.bot_msg = "chua co api"
                 if len(data["WEATHER"]) == 0:
                     self.weather = ["thời tiết"]
                 else:
@@ -124,6 +124,7 @@ class Chatbot(object):
                     self.bot_msg = "bạn cho xin thời gian :D"
                     self.bot_state = 2
                 else:
+                    self.bot_msg = self.query_api({"loc": self.loc, "time": self.time, "weather": self.weather})
                     self.bot_state = 3
             elif intend == 4 and self.bot_state == 1:
                 self.loc = None
@@ -136,7 +137,6 @@ class Chatbot(object):
                     self.loc = data["LOC"]
                 if data["TIME"] != []:
                     self.time = data["TIME"]
-                self.bot_msg = "chua co api"
                 if len(data["WEATHER"]) == 0:
                     self.weather = self.weather
                 else:
@@ -149,6 +149,7 @@ class Chatbot(object):
                     self.bot_msg = "bạn cho xin thời gian :D"
                     self.bot_state = 2
                 else:
+                    self.bot_msg = self.query_api({"loc":self.loc,"time":self.time,"weather":self.weather})
                     self.bot_state = 3
         data_msg["intend"] = intend
         data_msg["loc"] = self.loc
@@ -159,8 +160,24 @@ class Chatbot(object):
         return data_msg
 
     def query_api(self,data):
-        # api.get_forecast_weather()
-        pass
+        res = []
+        current_time = datetime.datetime.now()
+        current_day = current_time.day
+        current_month = current_time.month
+        current_year = current_time.year
+        locs = data['loc']
+        times = data['time']
+        weather = data['weather']
+        for loc in locs :
+            for time in times :
+                args = {"q":"{},{}".format(loc['lat'],loc['lng']),"dt":"{}-{}-{}".format(time['year'],time['month'],time['day'])}
+                if datetime.date(current_year,current_month,current_day) < datetime.date(int(time['year']),int(time['month']),int(time['day'])) :
+                    res.append(api.get_forecast_weather(args))
+                elif datetime.date(current_year,current_month,current_day) == datetime.date(int(time['year']),int(time['month']),int(time['day'])):
+                    res.append(api.get_data_current_weather(args))
+                else :
+                    res.append(api.get_history_weather(args))
+        return res
 
 
     def main(self):
